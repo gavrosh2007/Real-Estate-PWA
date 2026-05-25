@@ -457,7 +457,28 @@
             color: white;
         }
         .owner-item:hover { background: rgba(232,73,29,0.3); transform: translateX(4px); }
-        footer { text-align: center; margin-top: 2rem; font-size: 0.7rem; color: #aaa; }
+        
+        /* Универсальный подвал */
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            font-size: 0.85rem;
+        }
+        footer p {
+            margin: 0.3rem 0;
+        }
+        footer a {
+            color: #e8491d;
+            text-decoration: none;
+            margin: 0 0.3rem;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
         .lang-content { display: none; }
         .lang-content.active { display: block; }
         @media (max-width: 700px) {
@@ -552,7 +573,30 @@
             </div>
         </div>
     </div>
-    <footer><span id="footerText">© 2025 Недвижимость | Все объявления добавляются пользователями</span></footer>
+    
+    <!-- Универсальный подвал -->
+    <footer>
+        <div id="footer-ru" style="display: block;">
+            <p>© 2025 Недвижимость | Все объявления добавляются пользователями</p>
+            <p>
+                <a href="privacy.html">Политика конфиденциальности</a> |
+                <a href="terms.html">Условия использования</a> |
+                <a href="robots.txt" target="_blank">robots.txt</a> |
+                <a href="sitemap.xml" target="_blank">sitemap.xml</a> |
+                <a href="humans.txt" target="_blank">humans.txt</a>
+            </p>
+        </div>
+        <div id="footer-en" style="display: none;">
+            <p>© 2025 Real Estate | All listings are user-submitted</p>
+            <p>
+                <a href="privacy.html">Privacy Policy</a> |
+                <a href="terms.html">Terms of Use</a> |
+                <a href="robots.txt" target="_blank">robots.txt</a> |
+                <a href="sitemap.xml" target="_blank">sitemap.xml</a> |
+                <a href="humans.txt" target="_blank">humans.txt</a>
+            </p>
+        </div>
+    </footer>
 </div>
 
 <!-- Модалка добавления (продажа) -->
@@ -722,7 +766,6 @@
         document.getElementById('pwaBtnText').textContent = t.pwaBtn;
         document.getElementById('pwaTooltip').textContent = t.pwaTooltip;
         document.getElementById('pwaNote').textContent = t.pwaNote;
-        document.getElementById('footerText').textContent = t.footer;
         document.getElementById('listBtnText').textContent = t.listBtn;
         document.getElementById('ownersModalTitle').textContent = t.ownersModalTitle;
         const labels = ['labelCamera','labelPhone','labelComputer','labelWebsite','labelBrochure'];
@@ -737,6 +780,11 @@
         document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
         document.getElementById('ru-content').classList.toggle('active', lang === 'ru');
         document.getElementById('en-content').classList.toggle('active', lang === 'en');
+        
+        // Переключение универсального подвала
+        document.getElementById('footer-ru').style.display = (lang === 'ru') ? 'block' : 'none';
+        document.getElementById('footer-en').style.display = (lang === 'en') ? 'block' : 'none';
+        
         bindInstructionButtons();
         renderProperties();
     }
